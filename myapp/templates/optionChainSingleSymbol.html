@@ -64,9 +64,9 @@ Gap:
                     {% endif %}
                   {% else %}
                   {% if animal.section|divisibleby:2%}
-                  <h2 style="text-align:center;color:white;font-size:medium" class="badge bg-success text-wrap">BUY </h2>
-                  {% else %}
                   <h2 style="text-align:center;color:white;font-size:medium" class="badge bg-danger text-wrap">SELL</h2>
+                  {% else %}
+                  <h2 style="text-align:center;color:white;font-size:medium" class="badge bg-success text-wrap">BUY </h2>
                   {% endif %}
                   {% endif %}
                 {% endfor %}
@@ -75,11 +75,9 @@ Gap:
 
                 </li>
 
-  
-
               </ol>
             </nav>
-{% endfor %}
+            {% endfor %}
             {% for value in liveEqui %}
 
             <nav aria-label="breadcrumb">
