@@ -195,17 +195,17 @@ def create_currency():
     # if timenow > equitypastdate and doneToday != "Yes":
     #     initialEquity()
    
-    fnolist = []
+    # fnolist = []
 
-    gainList = list(LiveSegment.objects.filter(segment="gain").values_list('symbol', flat=True))
-    lossList = list(LiveSegment.objects.filter(segment="loss").values_list('symbol', flat=True))
-    segments = list(LiveSegment.objects.values_list('symbol', flat=True).distinct())
+    # gainList = list(LiveSegment.objects.filter(segment="gain").values_list('symbol', flat=True))
+    # lossList = list(LiveSegment.objects.filter(segment="loss").values_list('symbol', flat=True))
+    # segments = list(LiveSegment.objects.values_list('symbol', flat=True).distinct())
     
-    fnolist.extend(gainList)
-    fnolist.extend(lossList)
-    fnolist.extend(segments)
+    # fnolist.extend(gainList)
+    # fnolist.extend(lossList)
+    # fnolist.extend(segments)
 
-    fnolist = list(set(fnolist))
+    # fnolist = list(set(fnolist))
 
     def OIPercentChange(df):
         print("Enter OIper")
