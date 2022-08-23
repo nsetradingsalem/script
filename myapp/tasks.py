@@ -208,57 +208,62 @@ def create_currency():
     # fnolist = list(set(fnolist))
 
     def OIPercentChange(df):
-        print("Enter OIper")
-        ce = df.loc[df['type'] == "CE"]
-        pe = df.loc[df['type'] == "PE"]
+        try:
+            print("Enter OIper")
+            ce = df.loc[df['type'] == "CE"]
+            pe = df.loc[df['type'] == "PE"]
 
-        # ce_oipercent_df = ce.sort_values(by=['oi_change_perc'], ascending=False)
-        ce_oipercent_df = ce.where(ce['oi_change_perc'] !=0 ).sort_values(by=['oi_change_perc'], ascending=False)
+            # ce_oipercent_df = ce.sort_values(by=['oi_change_perc'], ascending=False)
+            ce_oipercent_df = ce.where(ce['oi_change_perc'] !=0 ).sort_values(by=['oi_change_perc'], ascending=False)
 
-        # print(ce_oipercent_df)
-        
-        minvalue = ce.loc[ce['strike'] != 0].sort_values('strike', ascending=True)
-        ceindex = minvalue.iloc[0].name
-        peindex = ceindex.replace("CE", "PE")
-        #pe = pe[peindex:]
+            # print(ce_oipercent_df)
+            
+            minvalue = ce.loc[ce['strike'] != 0].sort_values('strike', ascending=True)
+            ceindex = minvalue.iloc[0].name
+            peindex = ceindex.replace("CE", "PE")
+            #pe = pe[peindex:]
 
-        ceoi1 = ce_oipercent_df.iloc[0]['oi_change_perc']
-        cestrike = ce_oipercent_df.iloc[0]['strike']
-        peoi1 = pe.loc[pe['strike']==ce_oipercent_df.iloc[0]['strike']].iloc[0]['oi_change_perc']
+            ceoi1 = ce_oipercent_df.iloc[0]['oi_change_perc']
+            cestrike = ce_oipercent_df.iloc[0]['strike']
+            peoi1 = pe.loc[pe['strike']==ce_oipercent_df.iloc[0]['strike']].iloc[0]['oi_change_perc']
 
-        # print(ceoi1)
-        # print(cestrike)
-        # print(peoi1)
+            # print(ceoi1)
+            # print(cestrike)
+            # print(peoi1)
 
-        pe_oipercent_df = pe.where(pe['oi_change_perc'] !=0 ).sort_values(by=['oi_change_perc'], ascending=False)
+            pe_oipercent_df = pe.where(pe['oi_change_perc'] !=0 ).sort_values(by=['oi_change_perc'], ascending=False)
 
-        ceoi2 = pe_oipercent_df.iloc[0]['oi_change_perc']
-        pestrike = pe_oipercent_df.iloc[0]['strike']
-        peoi2 = ce.loc[ce['strike']==pe_oipercent_df.iloc[0]['strike']].iloc[0]['oi_change_perc']
+            ceoi2 = pe_oipercent_df.iloc[0]['oi_change_perc']
+            pestrike = pe_oipercent_df.iloc[0]['strike']
+            peoi2 = ce.loc[ce['strike']==pe_oipercent_df.iloc[0]['strike']].iloc[0]['oi_change_perc']
 
-        # print(ceoi2)
-        # print(pestrike)
+            # print(ceoi2)
+            # print(pestrike)
 
-        # print(peoi2)
-        import datetime as det
-        # celtt = pe_oipercent_df.iloc[count]['ltt']
-        celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
-        celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            # print(peoi2)
+            import datetime as det
+            # celtt = pe_oipercent_df.iloc[count]['ltt']
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
 
-        my_time_string = "15:30:00"
-        my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
+            my_time_string = "15:30:00"
+            my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
 
-        if celtt > my_datetime:
-            celtt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
-            peltt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            celtt = pe_oipercent_df.iloc[0]['ltt']
-            peltt = pe_oipercent_df.iloc[0]['ltt']
+            if celtt > my_datetime:
+                celtt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
+                peltt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                celtt = pe_oipercent_df.iloc[0]['ltt']
+                peltt = pe_oipercent_df.iloc[0]['ltt']
 
 
-        OIPercentChange = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
-        print("Exit OIper")
-        return OIPercentChange
+            OIPercentChange = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
+            print("Exit OIper")
+            return OIPercentChange
+        except:
+            OIPercentChange = {"celtt":0,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":0,"peoi2":0,"pestrike":0,"ceoi2":0}
+            print("Exit OIper")
+            return OIPercentChange
 
     def OITotal(df,item,dte):
         print("Enter OITotl")
@@ -326,75 +331,80 @@ def create_currency():
         return OITot
 
     def OIChange(df,item,dte):
-        ce = df.loc[df['type'] == "CE"]
-        pe = df.loc[df['type'] == "PE"]
+        try:
+            ce = df.loc[df['type'] == "CE"]
+            pe = df.loc[df['type'] == "PE"]
 
-        # print("1")
+            # print("1")
 
-        final_df = ce.loc[ce['oi_change'] != 0].sort_values('oi_change', ascending=False)
-        minvalue = ce.loc[ce['strike'] != 0].sort_values('strike', ascending=True)
+            final_df = ce.loc[ce['oi_change'] != 0].sort_values('oi_change', ascending=False)
+            minvalue = ce.loc[ce['strike'] != 0].sort_values('strike', ascending=True)
 
-        # print("2")
-        ceindex = minvalue.iloc[0].strike
-        # peindex = ceindex.replace("CE", "PE")
-        inde = pe[pe['strike']==ceindex].index.values
-        pe = pe[inde[0]:]
-        print(pe)
-        # ce.to_excel("ce.xlsx")
-        # print("3")
-        print(final_df.iloc[0]['strike'])
-        print(pe.loc[pe['strike']==str(final_df.iloc[0]['strike'])])   
-        peoi1 = pe.loc[pe['strike']==str(final_df.iloc[0]['strike'])].iloc[0]['oi_change']
-        count = 0
-        # print("4")
-        while peoi1 == 0:
-            count = count + 1
-            peoi1 = pe.loc[pe['strike']==final_df.iloc[count]['strike']].iloc[0]['oi_change']
-        # print("5")
-        cestrike = final_df.iloc[count]['strike']
-        ceoi1 = final_df.iloc[count]['oi_change']
-        import datetime as det
-        # print("6")
-        celtt = final_df.iloc[count]['ltt']
-        celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
-        celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            # print("2")
+            ceindex = minvalue.iloc[0].strike
+            # peindex = ceindex.replace("CE", "PE")
+            inde = pe[pe['strike']==ceindex].index.values
+            pe = pe[inde[0]:]
+            print(pe)
+            # ce.to_excel("ce.xlsx")
+            # print("3")
+            print(final_df.iloc[0]['strike'])
+            print(pe.loc[pe['strike']==str(final_df.iloc[0]['strike'])])   
+            peoi1 = pe.loc[pe['strike']==str(final_df.iloc[0]['strike'])].iloc[0]['oi_change']
+            count = 0
+            # print("4")
+            while peoi1 == 0:
+                count = count + 1
+                peoi1 = pe.loc[pe['strike']==final_df.iloc[count]['strike']].iloc[0]['oi_change']
+            # print("5")
+            cestrike = final_df.iloc[count]['strike']
+            ceoi1 = final_df.iloc[count]['oi_change']
+            import datetime as det
+            # print("6")
+            celtt = final_df.iloc[count]['ltt']
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
 
-        my_time_string = "15:30:00"
-        my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
+            my_time_string = "15:30:00"
+            my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
 
-        if celtt > my_datetime:
-            celtt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
-            peltt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            celtt = final_df.iloc[0]['ltt']
-            peltt = final_df.iloc[0]['ltt']
+            if celtt > my_datetime:
+                celtt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
+                peltt = det.datetime.now().replace(hour=15,minute=30,second=00).strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                celtt = final_df.iloc[0]['ltt']
+                peltt = final_df.iloc[0]['ltt']
 
-        print(ceoi1)
-        print(cestrike)
-        print(peoi1)
-        # print("7")
+            print(ceoi1)
+            print(cestrike)
+            print(peoi1)
+            # print("7")
 
-        final_df = pe.loc[pe['oi_change'] != 0].sort_values('oi_change', ascending=False)
+            final_df = pe.loc[pe['oi_change'] != 0].sort_values('oi_change', ascending=False)
 
-        ceoi2 = ce.loc[ce['strike']==final_df.iloc[0]['strike']].iloc[0]['oi_change']
-        count = 0
-        # print("8")
+            ceoi2 = ce.loc[ce['strike']==final_df.iloc[0]['strike']].iloc[0]['oi_change']
+            count = 0
+            # print("8")
 
-        while ceoi2 == 0:
-            count = count + 1
-            ceoi2 = ce.loc[ce['strike']==final_df.iloc[count]['strike']].iloc[0]['oi_change']
+            while ceoi2 == 0:
+                count = count + 1
+                ceoi2 = ce.loc[ce['strike']==final_df.iloc[count]['strike']].iloc[0]['oi_change']
 
-        pestrike = final_df.iloc[count]['strike']
-        peoi2 = final_df.iloc[count]['oi_change']
-        peltt = final_df.iloc[count]['ltt']
+            pestrike = final_df.iloc[count]['strike']
+            peoi2 = final_df.iloc[count]['oi_change']
+            peltt = final_df.iloc[count]['ltt']
 
-        # print(ceoi2)
-        # print(pestrike)
-        # print(peoi2)
+            # print(ceoi2)
+            # print(pestrike)
+            # print(peoi2)
 
-        OIChan = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
-        print("Exit OiChnge")
-        return OIChan
+            OIChan = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
+            print("Exit OiChnge")
+            return OIChan
+        except:
+            OIChan = {"celtt":0,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":0,"peoi2":0,"pestrike":0,"ceoi2":0}
+            print("Exit OiChnge")
+            return OIChan
 
     def optionChainprocess(df,item,dte):
        
