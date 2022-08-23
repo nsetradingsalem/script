@@ -398,8 +398,6 @@ def create_currency():
 
     def optionChainprocess(df,item,dte):
        
-        
-
         # Total OI Calculation from Option chain
         FutureData = {}
 
@@ -449,20 +447,20 @@ def create_currency():
         # print("before deletiong")
 
         from datetime import datetime, time
-        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(6,15))
+        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
 
-        # LiveEquityResult.objects.all().delete()
-        # LiveOITotalAllSymbol.objects.filter(time__lte = pastDate).delete()
+        LiveEquityResult.objects.all().delete()
+        LiveOITotalAllSymbol.objects.filter(time__lte = pastDate).delete()
 
-        # # # Deleting past historical data in the database
-        # HistoryOIChange.objects.filter(time__lte = pastDate).delete()
-        # HistoryOITotal.objects.filter(time__lte = pastDate).delete()
-        # HistoryOIPercentChange.objects.filter(time__lte = pastDate).delete()
+        # # Deleting past historical data in the database
+        HistoryOIChange.objects.filter(time__lte = pastDate).delete()
+        HistoryOITotal.objects.filter(time__lte = pastDate).delete()
+        HistoryOIPercentChange.objects.filter(time__lte = pastDate).delete()
 
-        # # Deleting live data
-        # LiveOITotal.objects.filter(time__lte = pastDate).delete()
-        # LiveOIChange.objects.filter(time__lte = pastDate).delete()
-        # LiveOIPercentChange.objects.filter(time__lte = pastDate).delete()
+        # Deleting live data
+        LiveOITotal.objects.filter(time__lte = pastDate).delete()
+        LiveOIChange.objects.filter(time__lte = pastDate).delete()
+        LiveOIPercentChange.objects.filter(time__lte = pastDate).delete()
 
         # print("After deletion")
         
