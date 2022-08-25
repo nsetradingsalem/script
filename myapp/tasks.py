@@ -136,7 +136,7 @@ def create_currency():
             print("Exit OIper")
             return OIPercentChange
         except:
-            OIPercentChange = {"celtt":celtt,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":peltt,"peoi2":0,"pestrike":0,"ceoi2":0}
+            OIPercentChange = {"celtt":str(celtt),"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":str(peltt),"peoi2":0,"pestrike":0,"ceoi2":0}
             print("Exit OIper")
             return OIPercentChange
 
