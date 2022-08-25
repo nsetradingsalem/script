@@ -132,7 +132,7 @@ def create_currency():
                 peltt = pe_oipercent_df.iloc[0]['ltt']
 
 
-            OIPercentChange = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
+            OIPercentChange = {"celtt":str(celtt),"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":str(peltt),"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
             print("Exit OIper")
             return OIPercentChange
         except:
@@ -274,7 +274,7 @@ def create_currency():
             print("Exit OiChnge")
             return OIChan
         except:
-            OIChan = {"celtt":0,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":0,"peoi2":0,"pestrike":0,"ceoi2":0}
+            OIChan = {"celtt":celtt,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":celtt,"peoi2":0,"pestrike":0,"ceoi2":0}
             print("Exit OiChnge")
             return OIChan
 
