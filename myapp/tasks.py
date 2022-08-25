@@ -136,6 +136,10 @@ def create_currency():
             print("Exit OIper")
             return OIPercentChange
         except:
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            peltt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            peltt = dt.strptime(str(peltt), "%Y-%m-%d %H:%M:%S").time()
             OIPercentChange = {"celtt":str(celtt),"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":str(peltt),"peoi2":0,"pestrike":0,"ceoi2":0}
             print("Exit OIper")
             return OIPercentChange
@@ -274,7 +278,11 @@ def create_currency():
             print("Exit OiChnge")
             return OIChan
         except:
-            OIChan = {"celtt":celtt,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":celtt,"peoi2":0,"pestrike":0,"ceoi2":0}
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            peltt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            peltt = dt.strptime(str(peltt), "%Y-%m-%d %H:%M:%S").time()
+            OIChan = {"celtt":celtt,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":peltt,"peoi2":0,"pestrike":0,"ceoi2":0}
             print("Exit OiChnge")
             return OIChan
 
