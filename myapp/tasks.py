@@ -16,7 +16,7 @@ from django_celery_beat.models import PeriodicTask, PeriodicTasks
 from datetime import timedelta
 from celery.exceptions import SoftTimeLimitExceeded
 from pytz import timezone
-import pendulum
+import pendulum 
 import calendar
 from datetime import date
 import time as te
@@ -53,134 +53,6 @@ def create_currency():
     ,'NAVINFLUOR','OBEROIRLTY','PAGEIND','PERSISTENT','PIDILITIND','PIIND','POLYCAB','PVR','RAMCOCEM','RELIANCE','SBICARD'
     ,'SBILIFE','SBIN','SHREECEM','SIEMENS','SRF','SRTRANSFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','RAIN','TATASTEEL','TECHM'
     ,'TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE','INDUSTOWER','OFSS']
-
-    # def initialEquity():
-    #     try:
-
-    #         import requests
-    #         url = 'https://www.truedata.in/downloads/symbol_lists/13.NSE_ALL_OPTIONS.txt'
-    #         s = requests.get(url).content
-    #         stringlist=[x.decode('utf-8').split('2')[0] for x in s.splitlines()]
-
-    #         symbols = list(set(stringlist))
-
-    #         TrueDatausernamereal = 'tdws135'
-    #         TrueDatapasswordreal = 'saaral@135'
-
-    #         remove_list = ['BANKNIFTY', 'FINNIFTY', 'NIFTY', 'ASIANPAINT', 'BAJAJFINSV', 'BHARTIARTL', 'BHEL', 'BPCL', 'DEEPAKNTR', 'FEDERALBNK', 'HDFC', 'IOC', 'IRCTC', 'IPCALAB', 'NATIONALUM', 'NTPC', 'PNB', 'SHREECEM', 'VEDL', 'ASTRAL', 'BOSCHLTD', 'EICHERMOT', 'GMRINFRA', 'HDFCLIFE', 'IBULHSGFIN', 'ITC', 'L&TFH', 'BANKBARODA', 'IDFCFIRSTB', 'SAIL', 'IDEA']
-    #         fnolist = [i for i in symbols if i not in remove_list]
-
-    #         # Default production port is 8082 in the library. Other ports may be given t oyou during trial.
-    #         realtime_port = 8082
-
-    #         print('Starting Real Time Feed.... ')
-    #         print(f'Port > {realtime_port}')
-
-    #         td_app = TD(TrueDatausernamereal, TrueDatapasswordreal, live_port=realtime_port, historical_api=False)
-    #         # print(symbols)
-    #         req_ids = td_app.start_live_data(symbols)
-    #         live_data_objs = {}
-
-    #         te.sleep(3)
-
-    #         liveData = {}
-    #         for req_id in req_ids:
-    #             # print(td_app.live_data[req_id].day_open)
-    #             if (td_app.live_data[req_id].ltp) == None:
-    #                 continue
-    #             else:
-    #                 liveData[td_app.live_data[req_id].symbol] = [td_app.live_data[req_id].ltp,td_app.live_data[req_id].day_open,td_app.live_data[req_id].day_high,td_app.live_data[req_id].day_low,td_app.live_data[req_id].prev_day_close,dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),td_app.live_data[req_id].change_perc]
-
-
-    #         callcrossedset = LiveEquityResult.objects.filter(strike__contains="Call Crossed")
-    #         callonepercentset = LiveEquityResult.objects.filter(strike="Call 1 percent")
-    #         putcrossedset = LiveEquityResult.objects.filter(strike="Put Crossed")
-    #         putonepercentset = LiveEquityResult.objects.filter(strike="Put 1 percent")
-    #         opencallcross = LiveEquityResult.objects.filter(opencrossed="call")
-    #         openputcross = LiveEquityResult.objects.filter(opencrossed="put")
-
-    #         callcrossedsetDict = {}
-    #         callonepercentsetDict = {}
-    #         putcrossedsetDict = {}
-    #         putonepercentsetDict = {}
-    #         opencallcrossDict = {}
-    #         openputcrossDict = {}
-
-    #         for i in callcrossedset:
-    #             callcrossedsetDict[i.symbol] = i.time
-    #         for i in callonepercentset:
-    #             callonepercentsetDict[i.symbol] = i.time
-    #         for i in putcrossedset:
-    #             putcrossedsetDict[i.symbol] = i.time
-    #         for i in putonepercentset:
-    #             putonepercentsetDict[i.symbol] = i.time
-    #         for i in opencallcross:
-    #             opencallcrossDict[i.symbol] = i.time
-    #         for i in openputcross:
-    #             openputcrossDict[i.symbol] = i.time
-
-    #         # Graceful exit
-    #         td_app.stop_live_data(symbols)
-    #         td_app.disconnect()
-    #         td_app.disconnect()
- 
-    #         for key,value in liveData.items():
-    #             if key in fnolist:
-                    
-    #                 if float(value[6]) >= 3:
-    #                     # print(key)
-    #                     if LiveSegment.objects.filter(symbol=key,segment="gain").exists():
-    #                         LiveSegment.objects.filter(symbol=key,segment="gain").delete()
-    #                         gain = LiveSegment(symbol=key,segment="gain",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         gain.save()
-
-    #                     else:
-    #                         gain = LiveSegment(symbol=key,segment="gain",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         gain.save()
-
-    #                 elif float(value[6]) <= -3:
-    #                     if LiveSegment.objects.filter(symbol=key,segment="loss").exists():
-    #                         LiveSegment.objects.filter(symbol=key,segment="loss").delete()
-    #                         loss = LiveSegment(symbol=key,segment="loss",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-    #                     else:
-    #                         loss = LiveSegment(symbol=key,segment="loss",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-
-    #                 elif float(value[6]) <= -0.30:
-    #                     if LiveSegment.objects.filter(symbol=key,segment="below").exists():
-    #                         LiveSegment.objects.filter(symbol=key,segment="below").delete()
-    #                         loss = LiveSegment(symbol=key,segment="below",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-    #                     else:
-    #                         loss = LiveSegment(symbol=key,segment="below",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-
-    #                 elif float(value[6]) >= 0.30:
-    #                     if LiveSegment.objects.filter(symbol=key,segment="above").exists():
-    #                         LiveSegment.objects.filter(symbol=key,segment="above").delete()
-    #                         loss = LiveSegment(symbol=key,segment="above",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-    #                     else:
-    #                         loss = LiveSegment(symbol=key,segment="above",change_perc=value[6],date=dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d'),time=dt.now(timezone("Asia/Kolkata")).strftime('%H:%M:%S'),doneToday="Yes")
-    #                         loss.save()
-
-    #         gainList = list(LiveSegment.objects.filter(segment="gain").values_list('symbol', flat=True))
-    #         lossList = list(LiveSegment.objects.filter(segment="loss").values_list('symbol', flat=True))
-        
-    #     except websocket.WebSocketConnectionClosedException as e:
-    #         print('This caught the websocket exception ')
-    #         td_app.disconnect()
-    #         # return render(request,"testhtml.html",{'symbol':item,'counter':1}) 
-    #     except IndexError as e:
-    #         print('This caught the exception')
-    #         print(e)
-    #         td_app.disconnect()
-    #         # return render(request,"testhtml.html",{'symbol':item,'counter':1}) 
-    #     except Exception as e:
-    #         print(e)
-    #         td_app.disconnect()
-    #         # return render(request,"testhtml.html",{'symbol':item,'counter':1}) 
   
     equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).strftime('%Y-%m-%d %H:%M:%S')
     timenow = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
@@ -213,8 +85,14 @@ def create_currency():
             ce = df.loc[df['type'] == "CE"]
             pe = df.loc[df['type'] == "PE"]
 
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            peltt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            peltt = dt.strptime(str(peltt), "%Y-%m-%d %H:%M:%S").time()
+
             # ce_oipercent_df = ce.sort_values(by=['oi_change_perc'], ascending=False)
             ce_oipercent_df = ce.where(ce['oi_change_perc'] !=0 ).sort_values(by=['oi_change_perc'], ascending=False)
+
 
             # print(ce_oipercent_df)
             
@@ -242,9 +120,6 @@ def create_currency():
 
             # print(peoi2)
             import datetime as det
-            # celtt = pe_oipercent_df.iloc[count]['ltt']
-            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
-            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
 
             my_time_string = "15:30:00"
             my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
@@ -261,7 +136,7 @@ def create_currency():
             print("Exit OIper")
             return OIPercentChange
         except:
-            OIPercentChange = {"celtt":0,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":0,"peoi2":0,"pestrike":0,"ceoi2":0}
+            OIPercentChange = {"celtt":celtt,"ceoi1":0,"cestrike":0,"peoi1":0,"peltt":peltt,"peoi2":0,"pestrike":0,"ceoi2":0}
             print("Exit OIper")
             return OIPercentChange
 
@@ -338,6 +213,12 @@ def create_currency():
             # print("1")
 
             final_df = ce.loc[ce['oi_change'] != 0].sort_values('oi_change', ascending=False)
+            celtt = final_df.iloc[0]['ltt']
+            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
+            peltt = final_df.iloc[0]['ltt']
+            peltt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
+            peltt = dt.strptime(str(peltt), "%Y-%m-%d %H:%M:%S").time()
             minvalue = ce.loc[ce['strike'] != 0].sort_values('strike', ascending=True)
 
             # print("2")
@@ -361,10 +242,6 @@ def create_currency():
             ceoi1 = final_df.iloc[count]['oi_change']
             import datetime as det
             # print("6")
-            celtt = final_df.iloc[count]['ltt']
-            celtt = dt.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
-            celtt = dt.strptime(str(celtt), "%Y-%m-%d %H:%M:%S").time()
-
             my_time_string = "15:30:00"
             my_datetime = det.datetime.strptime(my_time_string, "%H:%M:%S").time()
 
@@ -392,11 +269,6 @@ def create_currency():
 
             pestrike = final_df.iloc[count]['strike']
             peoi2 = final_df.iloc[count]['oi_change']
-            peltt = final_df.iloc[count]['ltt']
-
-            # print(ceoi2)
-            # print(pestrike)
-            # print(peoi2)
 
             OIChan = {"celtt":celtt,"ceoi1":ceoi1,"cestrike":cestrike,"peoi1":peoi1,"peltt":peltt,"peoi2":peoi2,"pestrike":pestrike,"ceoi2":ceoi2}
             print("Exit OiChnge")
@@ -417,15 +289,7 @@ def create_currency():
         OIChangeValue = OIChange(df,item,dte)
         print("after change")
         
-        if OIChangeValue == False:
-            print("returning false")
-            # return render(request,"testhtml.html",{'symbol':item,'counter':1})
-
         OITotalValue = OITotal(df,item,dte)
-
-        if OITotalValue == False:
-            print("returning false")
-            # return render(request,"testhtml.html",{'symbol':item,'counter':1})
 
         percentChange = OIPercentChange(df)
 
