@@ -286,6 +286,7 @@ def create_currency():
        
         # Total OI Calculation from Option chain
         FutureData = {}
+        df.to_excel(f"{item}.xlsx")
 
         # value1 = LiveOIChange.objects.all()
         # value2 = LiveOITotal.objects.all()
@@ -298,8 +299,14 @@ def create_currency():
         percentChange = OIPercentChange(df)
 
         # strikeGap =float(df['strike'].unique()[1]) - float(df['strike'].unique()[0])
-        midvalue = round(len(df['strike'].unique())/2)
-        strikeGap =float(df['strike'].unique()[midvalue]) - float(df['strike'].unique()[midvalue-1])
+        strikedf = df.loc[df['type'] == "CE"]
+        print(strikedf)
+        midvalue = round(len(strikedf['strike'].unique())/2)
+        print(f"Mid value {midvalue}")
+        strikeGap =float(strikedf['strike'].unique()[midvalue+1]) - float(strikedf['strike'].unique()[midvalue])
+        print(strikedf['strike'].unique()[midvalue])
+        print(strikedf['strike'].unique()[midvalue+1])
+        print(f"strikegap {strikeGap}")
 
         FutureData[item] = [OITotalValue['cestrike'],OITotalValue['pestrike'],strikeGap]
 
