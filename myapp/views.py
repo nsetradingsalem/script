@@ -335,8 +335,11 @@ def optionChain(request):
     dateToday = datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%d-%m-%Y')
     print(dateToday)
 
+    lot_dict = {'ABBOTINDIA': 40, 'AMARAJABAT': 1000, 'APOLLOHOSP': 125, 'AUROPHARMA': 1000, 'BAJAJFINSV': 50, 'BAJFINANCE': 125, 'BALRAMCHIN': 1600, 'BANDHANBNK': 1800, 'BERGEPAINT': 1100, 'BHARTIARTL': 950, 'ASIANPAINT': 200, 'CANFINHOME': 975, 'BAJAJ-AUTO': 250, 'COROMANDEL': 700, 'BHARATFORG': 1000, 'GODREJPROP': 325, 'HINDUNILVR': 300, 'INDUSINDBK': 900, 'INDUSTOWER': 2800, 'JINDALSTEL': 1250, 'LALPATHLAB': 250, 'LAURUSLABS': 900, 'MCDOWELL-N': 625, 'ADANIPORTS': 1250, 'MUTHOOTFIN': 375, 'NAVINFLUOR': 225, 'ICICIPRULI': 1500, 'PERSISTENT': 150, 'PIDILITIND': 250, 'TATACONSUM': 900, 'TATAMOTORS': 1425, 'TORNTPHARM': 500, 'TORNTPOWER': 1500, 'OBEROIRLTY': 700, 'CHAMBLFERT': 1500, 'CUMMINSIND': 600, 'SRTRANSFIN': 600, 'ULTRACEMCO': 100}
+
+    symbol_lot = lot_dict[symbol]
     if len(LiveOI) > 0:
-        return render(request, 'optionChainSingleSymbol.html', {'dateToday':dateToday,'LiveChangePercentOI':LiveChangePercentOI,'HistoryOIPercentChg':HistoryOIPercentChg,'liveEqui':liveEqui,'symbol':symbol,'OITotalValue':LiveOI,'OIChangeValue':LiveChangeOI,'HistoryOITot':HistoryOITot,'HistoryOIChg':HistoryOIChg})
+        return render(request, 'optionChainSingleSymbol.html', {'symbol_lot':symbol_lot,'dateToday':dateToday,'LiveChangePercentOI':LiveChangePercentOI,'HistoryOIPercentChg':HistoryOIPercentChg,'liveEqui':liveEqui,'symbol':symbol,'OITotalValue':LiveOI,'OIChangeValue':LiveChangeOI,'HistoryOITot':HistoryOITot,'HistoryOIChg':HistoryOIChg})
     else:
         return render(request, 'optionChainNoData.html')
 
