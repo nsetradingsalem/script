@@ -286,7 +286,7 @@ def create_currency():
        
         # Total OI Calculation from Option chain
         FutureData = {}
-        df.to_excel(f"{item}.xlsx")
+        #df.to_excel(f"{item}.xlsx")
 
         # value1 = LiveOIChange.objects.all()
         # value2 = LiveOITotal.objects.all()
