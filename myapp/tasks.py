@@ -26,15 +26,15 @@ import time as te
 def create_currency():
 
     from datetime import datetime, time,timedelta
-    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).time()
-    nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).date()
+    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).time()
+    nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).date()
 
     # LiveEquityResult.objects.all().delete()
     LiveSegment.objects.filter(time__lte = pastDate).delete()
     LiveSegment.objects.filter(date__lt = nsepadDate).delete()
 
-    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
-    segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).time()
+    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18))
+    segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).time()
 
     # LiveEquityResult.objects.all().delete()
     TestEquityResult.objects.filter(date__lte = pastDate).delete()
@@ -54,7 +54,7 @@ def create_currency():
     ,'SBILIFE','SBIN','SHREECEM','SIEMENS','SRF','SRTRANSFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','RAIN','TATASTEEL','TECHM'
     ,'TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE','INDUSTOWER','OFSS']
   
-    equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).strftime('%Y-%m-%d %H:%M:%S')
+    equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).strftime('%Y-%m-%d %H:%M:%S')
     timenow = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
 
     doneToday = LiveSegment.objects.values_list('doneToday', flat=True).distinct()
@@ -332,7 +332,7 @@ def create_currency():
         # print("before deletiong")
 
         from datetime import datetime, time
-        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
+        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18))
 
         #LiveEquityResult.objects.all().delete()
         LiveOITotalAllSymbol.objects.filter(time__lte = pastDate).delete()
@@ -460,7 +460,7 @@ def create_currency():
         try:
  
             # print("inside monthend")
-            expiry = "25-Aug-2022"
+            expiry = "29-Sep-2022"
             dte = dt.strptime(expiry, '%d-%b-%Y')
 
             # print("After exception")
@@ -898,9 +898,9 @@ def create_currency():
 
     #         #     # Finding out the pastdate
     #         #     from datetime import datetime, timedelta
-    #         #     pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
-    #         #     segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).time()
-    #         #     nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).date()
+    #         #     pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18))
+    #         #     segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).time()
+    #         #     nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).date()
     #         #     # LiveEquityResult.objects.all().delete()
     #         #     LiveEquityResult.objects.filter(date__lte = pastDate).delete()
 
