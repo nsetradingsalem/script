@@ -42,6 +42,8 @@ def create_currency():
     LiveSegment.objects.filter(time__lte = segpastDate).delete()
     LiveSegment.objects.filter(date__lt = nsepadDate).delete()
 
+    
+
     fnolist = ['AARTIIND','ABBOTINDIA','ABFRL','ACC','ADANIPORTS','ALKEM','AMARAJABAT','AMBUJACEM',
     'APOLLOHOSP','ASIANPAINT','ASTRAL','ATUL','AUBANK','AUROPHARMA','AXISBANK','BAJAJ-AUTO','BAJAJFINSV','BAJFINANCE','BALRAMCHIN','BANDHANBNK'
     ,'BATAINDIA','BERGEPAINT','BHARATFORG','BHARTIARTL','BIOCON','BOSCHLTD','BPCL','BSOFT','CANFINHOME','CHAMBLFERT','CHOLAFIN'
@@ -53,7 +55,8 @@ def create_currency():
     ,'NAVINFLUOR','OBEROIRLTY','PAGEIND','PERSISTENT','PIDILITIND','PIIND','POLYCAB','PVR','RAMCOCEM','RELIANCE','SBICARD'
     ,'SBILIFE','SBIN','SHREECEM','SIEMENS','SRF','SRTRANSFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','RAIN','TATASTEEL','TECHM'
     ,'TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE','INDUSTOWER','OFSS']
-  
+    
+    fnolist = ['NAM-INDIA']
     equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).strftime('%Y-%m-%d %H:%M:%S')
     timenow = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
 

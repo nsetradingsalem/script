@@ -325,9 +325,9 @@ def optionChain(request):
     print(LiveChangePercentOI)
 
     # History data
-    HistoryOITot = HistoryOITotal.objects.filter(symbol=symbol).order_by('-time')
-    HistoryOIChg = HistoryOIChange.objects.filter(symbol=symbol).order_by('-time')
-    HistoryOIPercentChg = HistoryOIPercentChange.objects.filter(symbol=symbol).order_by('-time')
+    HistoryOITot = HistoryOITotal.objects.filter(symbol=symbol).order_by('time')
+    HistoryOIChg = HistoryOIChange.objects.filter(symbol=symbol).order_by('time')
+    HistoryOIPercentChg = HistoryOIPercentChange.objects.filter(symbol=symbol).order_by('time')
 
     from datetime import datetime
     import pytz
