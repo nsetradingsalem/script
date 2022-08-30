@@ -55,6 +55,8 @@ def create_currency():
     ,'NAVINFLUOR','OBEROIRLTY','PAGEIND','PERSISTENT','PIDILITIND','PIIND','POLYCAB','PVR','RAMCOCEM','RELIANCE','SBICARD'
     ,'SBILIFE','SBIN','SHREECEM','SIEMENS','SRF','SRTRANSFIN','SUNPHARMA','SUNTV','SYNGENE','TATACHEM','TATACOMM','TATACONSUM','TATAMOTORS','RAIN','TATASTEEL','TECHM'
     ,'TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE','INDUSTOWER','OFSS']
+
+    # fnolist = ['VOLTAS']
     
     equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).strftime('%Y-%m-%d %H:%M:%S')
     timenow = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
@@ -302,6 +304,10 @@ def create_currency():
 
         # strikeGap =float(df['strike'].unique()[1]) - float(df['strike'].unique()[0])
         strikedf = df.loc[df['type'] == "CE"]
+        strikedf['strike'] = strikedf['strike'].astype(float, errors = 'raise')
+        # strikedf.sort_values('strike')
+        # strikedf['strike'] = (strikedf['strike'] !='n').astype(float)
+        strikedf = strikedf.sort_values(by=['strike'])
         print(strikedf)
         midvalue = round(len(strikedf['strike'].unique())/2)
         print(f"Mid value {midvalue}")
