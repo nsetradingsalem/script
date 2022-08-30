@@ -188,7 +188,7 @@
   
                 <ul class="list-group" style="align-content: flex-start;">
                   {% for value in callCrossed_even %}
-                  <li style="font-size:13px;padding:0px" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-Success" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
+                    <li style="font-size:13px;padding:0px" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-Success" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
                     {%if value.opencrossed == "call" %}
                     <span class="top" style="text-align:center"><b class="badge badge-warning">{{ value.open }}</b></span>
                     {% else %}
