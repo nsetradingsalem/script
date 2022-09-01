@@ -110,7 +110,7 @@
   
                 <ul class="list-group" ></ul>
                   {% for value in callCrossed_odd %}
-                  {% if value.change_perc >= 3 %}
+                  {% if value.symbol in three_list %}
                   <li style="font-size:13px;padding:0px;background-color: white;border-width: 0.1em;border-color: white;" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-primary" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
                     {%if value.opencrossed == "call" %}
                     <span class="top" style="text-align:center"><b class="badge badge-warning">{{ value.open }}</b></span>
@@ -189,7 +189,7 @@
   
                 <ul class="list-group" style="align-content: flex-start;">
                   {% for value in callCrossed_even %}
-                  {% if value.change_perc >= 3 %}
+                  {% if value.symbol in three_list %}
                     <li style="font-size:13px;padding:0px" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-Success" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
                     {%if value.opencrossed == "call" %}
                     <span class="top" style="text-align:center"><b class="badge badge-warning">{{ value.open }}</b></span>
@@ -278,7 +278,7 @@
   
                 <ul class="list-group">
                   {% for value in putCrossed_odd %}
-                  {% if value.change_perc <= -3 %}
+                  {% if value.symbol in three_list %}
                   <li style="font-size:13px;padding:0px" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-Success" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
                     {%if value.opencrossed == "put" %}
                       <span class="top" style="text-align:center"><b class="badge badge-warning">{{ value.open }}</b></span>
@@ -361,7 +361,7 @@
   
                 <ul class="list-group">
                   {% for value in putCrossed_even %}
-                  {% if value.change_perc <= -3 %}
+                  {% if value.symbol in three_list %}
                   <li style="font-size:13px;padding:0px;" class="list-group-item"><button type="button" id="1" name="1" class="btn btn-outline-primary" value="{{ value.symbol }}"><b>{{ value.symbol }}</b></button> |                 
                     {%if value.opencrossed == "put" %}
                       <span class="top" style="text-align:center"><b class="badge badge-warning">{{ value.open }}</b></span>
