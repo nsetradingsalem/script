@@ -26,15 +26,15 @@ import time as te
 def create_currency():
 
     from datetime import datetime, time,timedelta
-    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).time()
-    nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).date()
+    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).time()
+    nsepadDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).date()
 
     # LiveEquityResult.objects.all().delete()
     LiveSegment.objects.filter(time__lte = pastDate).delete()
     LiveSegment.objects.filter(date__lt = nsepadDate).delete()
 
-    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18))
-    segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).time()
+    pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
+    segpastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).time()
 
     # LiveEquityResult.objects.all().delete()
     TestEquityResult.objects.filter(date__lte = pastDate).delete()
@@ -58,7 +58,7 @@ def create_currency():
 
     # fnolist = ['VOLTAS']
     
-    equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18)).strftime('%Y-%m-%d %H:%M:%S')
+    equitypastdate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15)).strftime('%Y-%m-%d %H:%M:%S')
     timenow = datetime.now(timezone("Asia/Kolkata")).strftime('%Y-%m-%d %H:%M:%S')
 
     doneToday = LiveSegment.objects.values_list('doneToday', flat=True).distinct()
@@ -340,7 +340,7 @@ def create_currency():
         # print("before deletiong")
 
         from datetime import datetime, time
-        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,18))
+        pastDate = datetime.combine(datetime.now(timezone('Asia/Kolkata')), time(9,15))
 
         #LiveEquityResult.objects.all().delete()
         LiveOITotalAllSymbol.objects.filter(time__lte = pastDate).delete()
