@@ -6,7 +6,7 @@ from scipy.stats.stats import mode
 
 # Create your models here.
 
-class findThree(models.Model):
+class EquityThree(models.Model):
     symbol = models.CharField(max_length=20)
     time = models.TimeField(auto_now_add=False)
     date = models.DateField(auto_now_add=False)
@@ -15,7 +15,7 @@ class findThree(models.Model):
     class Meta:
 
         app_label = 'myapp'
-        
+
 class HistoryOIChange(models.Model):
     time = models.DateTimeField(auto_now_add=False)
     call1 = models.CharField(max_length=20,default="")
