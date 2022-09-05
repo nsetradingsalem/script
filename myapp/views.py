@@ -363,6 +363,9 @@ def optionChain(request):
     else:
         return render(request, 'optionChainNoData.html')
 
+def dashboard_with_pivot(request):
+    return render(request, 'dashboard_with_pivot.html', {})
+
 #Backup 1
 def testhtml(request):
     print(request.GET)
