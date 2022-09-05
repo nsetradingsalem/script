@@ -320,6 +320,32 @@ def optionChain(request):
     HistoryOIChg = HistoryOIChange.objects.filter(symbol=symbol).order_by('-time')
     HistoryOIPercentChg = HistoryOIPercentChange.objects.filter(symbol=symbol).order_by('-time')
 
+    if len(HistoryOITot) > 0:
+        early_total_oi = HistoryOITotal.objects.filter(symbol=symbol).order_by('time')[:1]
+        # early_total_oi = total_oi_record[0]
+
+    else:
+        early_total_oi = LiveOITotal.objects.filter(symbol=symbol)
+
+    if len(HistoryOIChg) > 0:
+        early_change_oi = HistoryOIChange.objects.filter(symbol=symbol).order_by('time')[:1]
+        #print(early_change_oi)
+        # early_change_oi = HistoryOIChg[0]
+        # print(f"Live : {early_change_oi}")
+        # early_change_oi = change_oi_record[1]
+
+    else:
+        early_change_oi = LiveOIChange.objects.filter(symbol=symbol)
+
+    if len(HistoryOIPercentChg) > 0:
+        early_percent_change = HistoryOIPercentChange.objects.filter(symbol=symbol).order_by('time')[:1]
+        print(early_percent_change)
+        # early_percent_change = percent_oi_record[0]
+        # early_percent_change = HistoryOIPercentChg[0]
+
+    else:
+        early_percent_change = LiveOIPercentChange.objects.filter(symbol=symbol)
+
     from datetime import datetime
     import pytz
     # dateToday = datetime.today().strftime('%d-%m-%Y')
@@ -330,7 +356,7 @@ def optionChain(request):
         'TORNTPOWER': 1500, 'TRENT': 725, 'TVSMOTOR': 1400, 'UPL': 1300, 'WHIRLPOOL': 350, 'WIPRO': 1000, 'ZEEL': 3000, 'JSWSTEEL': 1350, 'OBEROIRLTY': 700, 'RELIANCE': 250, 'CHAMBLFERT': 1500, 'CROMPTON': 1500, 'CUMMINSIND': 600, 'DELTACORP': 2300, 'DIXON': 125, 'TATACHEM': 1000, 'GODREJCP': 1000, 'HAVELLS': 500, 'ICICIGI': 425, 'IGL': 1375, 'INDIGO': 300, 'JKCEMENT': 250, 'SUNPHARMA': 700, 'MCX': 400, 'POLYCAB': 300, 'RAMCOCEM': 850, 'SRTRANSFIN': 600, 'SYNGENE': 1000, 'UBL': 400, 'ULTRACEMCO': 100, 'VOLTAS': 500, 'ZYDUSLIFE': 1800, 'SBIN': 1500, 'GSPL': 2500}
     symbol_lot = lot_dict[symbol]
     if len(LiveOI) > 0:
-        return render(request, 'optionChainSingleSymbol.html', {'symbol_lot':symbol_lot,'dateToday':dateToday,'LiveChangePercentOI':LiveChangePercentOI,'HistoryOIPercentChg':HistoryOIPercentChg,'liveEqui':liveEqui,'symbol':symbol,'OITotalValue':LiveOI,'OIChangeValue':LiveChangeOI,'HistoryOITot':HistoryOITot,'HistoryOIChg':HistoryOIChg})
+        return render(request, 'optionChainSingleSymbol.html', {'early_total_oi':early_total_oi,'early_change_oi':early_change_oi,'early_percent_change':early_percent_change,'symbol_lot':symbol_lot,'dateToday':dateToday,'LiveChangePercentOI':LiveChangePercentOI,'HistoryOIPercentChg':HistoryOIPercentChg,'liveEqui':liveEqui,'symbol':symbol,'OITotalValue':LiveOI,'OIChangeValue':LiveChangeOI,'HistoryOITot':HistoryOITot,'HistoryOIChg':HistoryOIChg})
     else:
         return render(request, 'optionChainNoData.html')
 
