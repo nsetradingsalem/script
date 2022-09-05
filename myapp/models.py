@@ -6,7 +6,7 @@ from scipy.stats.stats import mode
 
 # Create your models here.
 
-class EquityThree(models.Model):
+class findThree(models.Model):
     symbol = models.CharField(max_length=20)
     time = models.TimeField(auto_now_add=False)
     date = models.DateField(auto_now_add=False)
@@ -187,6 +187,20 @@ class LiveSegment(models.Model):
 
     # def __str__(self):
     #     return self.symbol+" "+self.segment+" "+self.date
+
+    class Meta:
+
+        app_label = 'myapp'
+
+class SuperLiveSegment(models.Model):
+    symbol = models.CharField(max_length=20)
+    segment = models.CharField(max_length=20)
+    time = models.TimeField(auto_now_add=False)
+    date = models.DateField(auto_now_add=False)
+    change_perc = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.symbol+" "+self.segment+" "+self.date
 
     class Meta:
 
