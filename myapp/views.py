@@ -7,7 +7,7 @@ from django.shortcuts import redirect,render
 from django.contrib import messages
 from nsepython import *
 import nsepython
-from myapp.models import HistoryOIChange,HistoryOITotal,LiveOIChange,LiveOITotal,LiveOITotalAllSymbol,LiveEquityResult,LiveOIPercentChange,HistoryOIPercentChange, LiveSegment,EquityThree
+from myapp.models import HistoryOIChange,HistoryOITotal,LiveOIChange,LiveOITotal,LiveOITotalAllSymbol,LiveEquityResult,LiveOIPercentChange,HistoryOIPercentChange, LiveSegment,EquityThree,SuperLiveSegment
 from django.db.models import Count, F, Value
 
 import pandas as pd
@@ -883,6 +883,16 @@ def sample(request):
     ,'TORNTPHARM','TORNTPOWER','TRENT','TVSMOTOR','UBL','ULTRACEMCO','UPL','VOLTAS','WHIRLPOOL','WIPRO','ZEEL','ZYDUSLIFE','INDUSTOWER','OFSS']
 
     #fnolist = list(LiveSegment.objects.values_list('symbol', flat=True).distinct())
+
+    gain_list = SuperLiveSegment.objects.filter(segment__in=["gain"]).order_by('-change_perc').values_list('symbol', flat=True) 
+    loss_list = SuperLiveSegment.objects.filter(segment__in=["loss"]).order_by('change_perc').values_list('symbol', flat=True) 
+    super_list = list(gain_list) + list(loss_list)
+    setA = set(fnolist)
+    setB = set(super_list)
+
+    # Get new set with elements that are only in a but not in b
+    onlyInA = setA.difference(setB)
+    fnolist = list(setB) + list(onlyInA)
 
     return render(request,"sample.html",{'fnolist':fnolist})
     # return render(request,"sample.html")
