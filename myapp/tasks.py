@@ -51,7 +51,7 @@ def create_currency():
     #super_three_list = list(SuperLiveSegment.objects.all().values_list('symbol', flat=True))
     gain_list = SuperLiveSegment.objects.filter(segment__in=["gain"]).order_by('-change_perc').values_list('symbol', flat=True) 
     loss_list = SuperLiveSegment.objects.filter(segment__in=["loss"]).order_by('change_perc').values_list('symbol', flat=True) 
-    super_list = gain_list + loss_list
+    super_list = list(gain_list) + list(loss_list)
     setA = set(fnolist)
     setB = set(super_list)
 
